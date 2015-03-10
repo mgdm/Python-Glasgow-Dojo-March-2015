@@ -43,16 +43,19 @@ def check_board(the_array):
 			num = count_neighbours(the_array, x, y)
 			if the_array[x, y]:
 				if num < 2:
-					new_array[x, y] = False
+					new_array[x, y] = 0
 				elif num < 4:
-					new_array[x, y] = True
+					new_array[x, y] = 1
 				else:
-					new_array[x, y] = False
+					new_array[x, y] = 0
 			else:
 				if num == 3:
-					new_array[x, y] = True
+					new_array[x, y] = 1
 
 	return new_array
+
+def is_board_dead(board):
+    return board.sum() == 0
 
 def print_board(board):
     for y in xrange(0, board.shape[1]):
@@ -73,9 +76,14 @@ def main():
 	y = int(y) - 4
 
 	the_array = make_board(x, y)
-	for x in xrange(1,10):
+	for x in xrange(1,100):
 		the_array = check_board(the_array)
                 clear_screen()
+
+		if is_board_dead(the_array):
+		    print "No life here"
+		    sys.exit()
+
                 print_board(the_array)
                 time.sleep(0.1)
 		# draw_array(the_array)
