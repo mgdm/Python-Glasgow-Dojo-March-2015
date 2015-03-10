@@ -1,6 +1,5 @@
-import numpy, time, sys
+import numpy, time, sys, os
 from random import randrange
-
 
 def make_array(x, y):
 	the_array = numpy.zeros((x, y))
@@ -69,8 +68,10 @@ def clear_screen():
     print("\x1b[2J\x1b[H")
 
 def main():
-	x = 20
-	y = 20
+	y, x = os.popen('stty size', 'r').read().split()
+	x = int(x) / 2 - 4
+	y = int(y) - 4
+
 	the_array = make_board(x, y)
 	for x in xrange(1,10):
 		the_array = check_board(the_array)
