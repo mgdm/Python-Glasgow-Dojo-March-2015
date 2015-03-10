@@ -1,4 +1,4 @@
-import numpy
+import numpy, time
 from random import randrange
 
 
@@ -55,13 +55,28 @@ def check_board(the_array):
 
 	return new_array
 
+def print_board(board):
+    for y in xrange(0, board.shape[1]):
+        for x in xrange(0, board.shape[0]):
+            if board[x,y] == 1:
+                print '*',
+            else:
+                print ' ',
+
+        print
+
+def clear_screen():
+    print("\x1b[2J\x1b[H")
 
 def main():
-	x = 100
-	y = 100
+	x = 50
+	y = 50
 	the_array = make_board(x, y)
 	for x in xrange(1,10):
 		the_array = check_board(the_array)
+                clear_screen()
+                print_board(the_array)
+                time.sleep(0.1)
 		# draw_array(the_array)
 
 
